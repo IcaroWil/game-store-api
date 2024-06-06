@@ -1,11 +1,11 @@
 import { Router } from 'express'
-import { getAllGames, getGameByIdOrName, createGame, updateGame, deleteGame } from '../controllers/gameController'
+import { getAllGames, getGameByName, createGame, updateGame, deleteGame } from '../controllers/gameController'
 
 const router = Router()
 
 router.get('/games', getAllGames)
-router.get('/games/:id', getGameByIdOrName)
-router.get('/games/name/:name', getGameByIdOrName)
+router.get('/games/:id', getGameByName) // Rota para buscar por ID
+router.get('/games/name/:name', getGameByName) // Rota para buscar por nome
 router.post('/games', createGame)
 router.put('/games/:id', updateGame)
 router.delete('/games/:id', deleteGame)
