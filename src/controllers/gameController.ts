@@ -10,15 +10,23 @@ export const getAllGames = async (req: Request, res: Response) => {
   }
 }
 
+export const getGameById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+    const game = await Game.findById(id)
+    if (!game) return res.status(404).json({ message: 'Jogo não encontrado' })
+    res.json(game)
+  } catch (error: any) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
 export const getGameByName = async (req: Request, res: Response) => {
   try {
-    const { name } = req.query;
-    if (!name) return res.status(400).json({ message: 'O nome do jogo é necessário para a consulta' });
-
-    const game = await Game.findOne({ name: name.toString() });
-    if (!game) return res.status(404).json({ message: 'Jogo não encontrado' });
-
-    res.json(game);
+    const { name } = req.params
+    const game = await Game.findOne({ name })
+    if (!game) return res.status(404).json({ message: 'Jogo não encontrado' })
+    res.json(game)
   } catch (error: any) {
     res.status(500).json({ message: error.message })
   }
